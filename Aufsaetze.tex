@@ -1,0 +1,895 @@
+\documentclass[a4paper]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{hyperref}
+
+\usepackage{graphicx}
+
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{esint}   % \oiint
+\usepackage{units}
+\usepackage{mhchem}
+
+\usepackage{todonotes}
+
+\begin{document}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\pagebreak
+
+\section{Röntenstrahlung}
+\subsection{Stichworte}
+\begin{itemize}[noitemsep]
+  \item Was ist RS? Einordnung ins elmag Spektrum. Historisches?
+  \item Entstehungsarten, Spektrum mit charakteristischen Linien + Bremsstrahlung (Grenzfrequenz)
+  \item Nachweis
+  \item Wechselwirkungen mit Materie: Fotoeffekt (Absorptionskanten), Streuung (Rayleigh, Compton), Paarbildung, Auger-Effekt
+  \item Analyse: Braggreflexion
+  \item Formeln: Grenzfrequenz (Duane-Hunt), Mosley, Compton, Bragg, Absorptionskoeffizient
+\end{itemize}
+
+\subsection{Grundlagen}
+Röntgenstrahlung ist wie auch Licht, Radio- oder Mikrowellen eine Art der elektromagnetischen Strahlung, die im kurzwelligen Bereich angesiedelt ist ($\unit[0.01\cdots10]{nm}$, $\unit[3\cdot10^{16}\cdots 3\cdot 10^{19}]{Hz}$, $\unit[.1\cdots100]{keV}$). Sie wurde um die vorletzte Jahrhundertwende von Wilhelm Conrad Röntgen zufällig entdeckt, als er mit Elektronenröhren experimentierte. Festgestellt wurde die Strahlung dadurch, dass sie lichtdicht verpackte Fotoplatten schwärzen konnte und menschliches Gewebe durchdringen konnte, von Knochen aber geschwächt wird.
+
+Heutzutage wird Röntgenstrahlung gezielt erzeugt, indem Elektronen mit einigen $\unit[10]{kV}$ Beschleunigungsspannung auf eine Metallanode beschleunigt werden. Wenn sie dort auftreffen, können auf zwei verschiedene Arten Röntgenstrahlung entstehen: die kontinuierliche Bremsstrahlung und die charakteristische Röntgenstrahlung, die vom Anodenmaterial abhängig ist.
+
+\subsection{Bremsstrahlung}
+Wenn die Elektronen auf die Anode treffen, können sie im Coulombfeld der Atomkerne abgebremst werden. Dabei geben sie elektromagnetische Strahlung ab ("`beschleunigte Ladung sendet elektromagnetische Strahlung aus"'). Diese Bremsstrahlung ist über einen breiten Wellenlängenbreich verteilt, da die Elektronen unterschiedlich stark abgebremst werden. Wenn die gesamte (kinetische) Energie der Elektronen bei dem Bremsvorgang in Strahlung umgewandelt wird, ergibt sich die Grenzfrequenz, die eine obere Grenze der Frequenz der Strahlung darstellt.
+\begin{align*}
+  E_{\text{Photon}} = hf = eU = E_{\text{kin}, e} \\
+  \Rightarrow f_{\text{max}} = \frac{e}{h}\cdot U,\quad \lambda_{\text{min}} = \frac{hc}{e} \cdot \frac{1}{U}
+  \label{equ:Grenzfrequenz}
+\end{align*}
+
+\subsection{Charakteristische Röntgenstrahlung}
+Diese Art der Strahlung ist charakteristisch für das Anodenmaterial. Sie entsteht in zwei Schritten: zunächst wird durch die eintreffenden Elektronen ein Elektron des Anodenmaterials aus einer inneren Schale entfernt (ionisiert oder in eine äußere Schale). Um das so entstandene "`Loch"' auszufüllen, "`fällt"' ein Elektron aus einer weiter außen liegenden Schale dorthin. Aufgrund der geringeren Energie in den inneren Schalen gibt das fallende Elektron seine überschüssige Energie in Form von Strahlung ab. Die abgegebene Energie ist dabei von den Energiedifferenzen der beteiligten Schalen und damit vom Anodenmaterial abhängig. Nomenklatur: K, L, M für die Zielschale, $\alpha, \beta, \gamma$ für die Fallhöhe.
+
+\subsubsection{Mosleysches Gesetz}
+Für den $K_\alpha$-Übergang kann die Frequenz mit der Kernladungszahl in verbindung gebracht werden:
+\begin{equation*}
+  f(K_\alpha) = \frac{3}{4}R_\text{H}(Z-1)^2
+  \label{equ:Mosley}
+\end{equation*}
+mit der Rydbergfrequenz $R_\text{H} = (e^4m_e)/(8\varepsilon_0^2h^3) \approx \unit[3.3\cdot10^{15}]{Hz}$. Die Kernladungszahl $Z$ wird um Eins verringert, da das verbleibende Elektron in der K-Schale eine Ladung abschirmt. Ein $\sqrt{f(K_\alpha)}$-$Z$-Plot verschiedener Materialien zeigt einen linearen Zusammenhang.
+
+\subsection{Wechselwirkung mit Materie}
+Beim Durchgang durch Materie wird Röntgenstrahlung exponentiell abgeschwächt. Dabei treten mehrere Effekte auf:
+\subsubsection{Fotoeffekt}
+Ein Röntgenphoton trifft auf ein gebundenes Elektron und übertragt seine Energie auf dieses (Ionisierung oder anhebung des Elektron in eine höhere Schale). Dabei nimmt der Absorptionskoeffizient mit fallender Wellenlänge ab, mit Ausnahme der Absorptionskanten (K-, L-Kante), bei der die Energie ausreicht, um erstmalig Elektronen dieser Schalen zu ionisieren. Abgesehen von diesen Kanten gilt 
+\begin{equation*}
+  \tau \sim \varrho \lambda^3Z^3
+  \label{equ:RoentgenAbsorption}
+\end{equation*}
+\subsubsection{Rayleighstreuung}
+Elastische Streuung: die Röntgenphotonen regen Elektronen des Materials zu Schwingungen an, wodurch diese isotrop Strahlung aussenden. Dadurch geht ein Großteil der Strahlung in der ursprünglichen Richtung verloren.
+\subsubsection{Comptonstreuung}
+Inelastische Streuung mit definiertem Frequenzverlust (der Stoß selbst ist elastisch!) an einem freien, ruhenden Elektron. Für ein unter dem Winkel $\varphi$ gestreutes Photon gilt
+\begin{equation*}
+  \Delta \lambda=\frac{h}{m_0c}\left(1- \cos \varphi \right),
+  \label{equ:Compton}
+\end{equation*}
+unabhängig von der ursprünglichen Wellenlänge.\todo{Herleitung?}
+\subsubsection{Paarbildung}
+Umwandlung von Energie in Masse (meist Elektron-Positron-Paar). Dazu muss die Photoneneergie mindestens der Ruheenergie der entstehenden Teilchen entsprechen.
+
+\subsubsection{Auger-Effekt}
+Die Energie, die beim Auffüllen des Loches in einer inneren Schale frei wird, kann auch auf ein anderes Elektron des Atoms übertragen werden, was zur Aussendung dieses sogenannten Auger-Elektrons führt.
+
+\subsection{Braggreflexion}
+Reflexionen an einem Einkristall mit bekanntem Gitterabstand $d$ können zur spektralen Analyse von Röntgenstrahlung verwendet werden. Es gilt das Braggsche Reflexionsgesetz für die Winkel $\alpha$, unter der konstruktive Interferenz auftritt.
+\begin{equation*}
+  2d\sin\alpha = n\cdot\lambda
+  \label{equ:Bragg}
+\end{equation*}\todo{Herleitung}
+
+
+\section{Laser}
+
+\subsection{Stichworte}
+\begin{itemize}[noitemsep]
+  \item Was ist Laserstrahlung? Akronym, Enstehung, Eigenschaften.
+  \item Absorption, spontane Emission, stimulierte Emission, Einsteinkoeffizienten
+  \item Besetzungsinversion, Aufbau, Pumpquellen
+  \item Dreiniveau-, Vierniveaulaser, warum kein Zweiniveaulaser?
+  \item Kohärenz
+  \item Formeln: Boltzmannverteilung
+\end{itemize}
+
+\subsection{Grundlagen}
+LASER steht für Light Amplification by Stimulated Emission of Radiation, also Lichtverstärkung durch stimulierte Strahlungsemission. Laserlicht ist sehr intensives, monochromatisches, kohärentes und kaum divergentes Licht. Der Hauptmechanismus, die stimulierte Emission, findet statt, wenn ein Photon auf ein angeregtes Elektron trifft. Dadurch kann das Elektron in seinen Grundzustand zurückfallen und dabei ein Photon aussenden, das in Wellenlänge, Phase und Richtung dem anregenden entspricht.
+
+\subsection{Elektronenübergänge}
+Es sind verschiedene Übergänge von Elektronen zwischen den diskreten Energieniveaus in Atomen möglich. Zunächst können Elektronen Energie aufnehmen (absorbieren) und auf ein höheres Energieniveau wechseln, wenn ein Photon geeigneter Energie auftrifft.
+
+Angeregte Elektronen fallen nach einiger Zeit (je nach Lebenddauer des Zustands) spontan auf ein unbesetztes niedrigeres Energieniveau zurück, falls vorhanden. Dabei wird ein Photon gemäß $E = hf$ abgegeben, jedoch mit willkürlicher Richtung und Phase.
+
+Wenn während der Lebenszeit im angeregten Zustand das Elektron von einem Photon getroffen wird, kann es zur stimulierten Emission angeregt werden.
+
+Die Wahrscheinlichkeiten für die drei Übergangsarten werden durch die Einsteinkoeffizienten ausgedrückt. Es ergibt sich, dass die Wahrscheinlichkeiten für die beiden stimulierten Prozesse gleich sind ($B$). Die Wahrscheinlichkeit für die spontane Emission wird mit $A$ bezeichnet.
+
+\subsection{Besetzungsinversion, Aufbau}
+Um Photonen durch stimulierte Emission zu erzeugen, müssen sich mehr Elektronen im angeregten als im Grundzustand befinden, da die Wahrscheinlichkeiten für absorption und stimulierte Emission gleich sind. Dieser Zustand wird als Besetzungsinversion bezeichnet und muss durch externe Energiezufuhr ("`Pumpen"') aufrechterhalten werden. Übliche Pumpquellen sind Licht (optisches Pumpen) oder elektrischer Strom (Gasentladungsröhre, z.\,B.\, im He-Ne-Laser).
+
+Die Strahlung entsteht im aktiven Medium (beliebiger Aggregatzustand), nachdem es gepumpt wurde. Das aktive Medium wird auf beiden Seiten von Spiegeln begrenzt, von denen einer einen geringen Transmissionskoeffizienten aufweist. Über diesen wird die Strahlung ausgekoppelt. Das reflektierte Licht läuft erneut durch das aktive Medium und kann erneut zu stimulierter Emission führen.
+
+\subsection{Laserniveaus}
+Um einen Laser zu konstruieren, wird ein Material mit mindestens drei Energieniveaus benötigt. Ein "`Zweiniveaulaser"' ist nicht möglich, da keine Besetzungsinversion erreicht werden kann: Da die Wahrscheinlichkeiten für Absorption und stimulierte Emission gleich sind, kann bestenfalls Gleichverteilung erreicht werden.
+
+Es werden also mindestens drei Niveaus benötigt. Ausgehend vom Grundniveau $E_1$ wird in das oberste Niveau $E_2$ gepumpt, von dem aus ein spontaner, kurzlebiger Übergang in das eigentliche Laserniveau $E_3$ erfolgt. Dieses Niveau hat eine vergleichsweise lange Lebensdauer, so dass die Wahrscheinlichkeit für eine stimulierte Emission überwiegt. Besetzungsinversion ist mit genügend intensivem Pumpen möglich.
+
+Noch bessere Inversion lässt sich mit vier Niveaus erzeugen, wobei ein weiterer schneller Übergang unterhalb des Laserübergangs stattfindet. Damit ist das untere Laserniveau praktisch immer unbesetzt, was eine stimulierte Emission aus diesem Niveau ausschließt.
+
+\subsection{Eigenschaften des Laserlichts}
+Laserlicht ist monochromatisch, da alle Photonen aus demselben Übergang stammen, also dieselbe Energie und dieselbe Frequenz aufweisen. Durch die stimulierte Emission sind außerdem alle Wellenzüge der Photonen kohärent, so dass sich Laserlicht optimal für Interferenzphänomene eignet.
+
+Aufgrund der hohen, gebündelten Intensität kann Laserlicht gefährlich für die Netzhaut (oder sogar die "`normale"' Haut) sein, was Vorsichts- und Schutzmaßnahmen notwendig machen kann. Andererseits ermöglicht die hohe Intensität und Bündelungsfähigkeit auch medizinische und industrielle Anwendungen.
+
+
+
+\section{Strömungen}
+
+\subsection{Stichworte}
+\begin{itemize}[noitemsep]
+  \item Beschreibung von Strömungen
+  \item reale und ideale Flüssigkeiten und Gase
+  \item Staudruck, statischer Druck, Druckmessung
+  \item laminare und turbulente Strömungen
+  \item Bernoulli
+  \item Formeln: Volumenstrom, Massenstromstärke, Massenstromdichte, Kontinuitätsgleichung
+\end{itemize}
+
+\subsection{Grundlagen}
+Strömungen sind bewegte, kontinuierlich verteilte Flüssigkeiten oder Gase. Sie werden durch Druckdifferenzen, Kräfte oder zwischenmolekulare Reibung verursacht. Die Strömungsgeschwindigkeit der Teilchen überwiegt die thermische Bewegung bei Weitem. Vereinfachend werden oft ideale Flüssigkeiten (inkompressibel, reibungsfrei) und ideale Gase (kein Eigenvolumen, reibungsfrei, nur elastische Stöße zwischen Teilchen) betrachtet (zusammenfassend: ideale Fluide). 
+
+Für eine konstante, eindimensionale Strömung sind Volumenstrom, Massenstromstärke und Massenstromdichte definiert als
+\begin{align*}
+  I &= \frac{\text{d}V}{\text{d}t} = vA,\\
+  I_\text{m} &= \frac{\text{d}m}{\text{d}t} = \varrho I = \varrho vA,\\
+  j_\text{m} &= \frac{\text{d}I_\text{m}}{\text{d}A} = \varrho v.
+\end{align*}
+
+Eine Strömung wird von einem Geschwindigkeitsfeld beschrieben, das orts- und zeitabhängig sein kann, die Feldlinien heißen Stromlinien.
+
+Laminare Strömung liegt vor, wenn Schichten des Fluids aneinander vorbeiströmen, ohne sich zu vermischen. Wenn sich die Schichten chaotisch verwirbeln, liegt turbulente Strömung vor.
+
+\subsection{Druckarten, Druckmessung}
+Die Kontinuitätsgleichung beschreibt die Tatsache, dass bei inkompressiblen Flüssigkeiten der integrierte Massenstrom über eine geschlossene Fläche Null sein muss:
+\begin{equation*}
+  \oint \varrho \vec \vec v\cdot\text{d}\vec A = 0
+\end{equation*}
+
+In einem horizontalem Rohr mit schwankendem Querschnitt ergibt sich daraus, dass Strömungsgeschwindigkeit und Querschnittsfläche umgekehrt proportional zueinander sind (Einströmen in $\vec A_1$, Ausströmen in $\vec A_2$):
+\begin{align*}
+  -v_1A_1 + v_2A_2 = 0 \iff v_1A_1 = v_2A_2 \\
+  \Rightarrow vA = \text{const}
+\end{align*}
+
+Energiebetrachtung ein einem durchströmtem Rohr mit schwankendem Querschnitt und schwankender Höhe: durch die Druckdifferenz $p_1-p_2$ wird Arbeit an der Flüssigkeit verrichtet, die sich in kinetischer Energie $m(v_2^2-v_1^2)/2$ und potentieller Energie $mg(h_2-h_1)$ ausdrückt. Formal ergibt sich die Bernoullische Gleichung
+\begin{align*}
+  p_1 + \frac{\varrho}{2}v_1^2 + \varrho gh_1 = p_2 + \frac{\varrho}{2}v_2^2 + \varrho gh_2.
+\end{align*}
+
+Für eine horizontale Röhre fallen die potentiellen Terme weg und es ergibt sich
+\begin{align*}
+  p_1 + \frac{\varrho}{2}v_1^2  = p_2 + \frac{\varrho}{2}v_2^2\\
+  \Rightarrow p+\frac{\varrho}{2}v^2 = p_g = \text{const}
+\end{align*}
+
+Dabei wird $p$ als statischer Druck und der geschwindigkeitsabhängige Term Staudruck genannt.
+
+Leichte Folgerungen daraus: Bunsensches Ausströmungsgesetz für ein Gas aus einem Gefäß mit Überdruck $\Delta p$:
+\begin{equation*}
+  v = \sqrt{\frac{2\Delta p}{\varrho}}
+\end{equation*}
+und das Torricellische Ausflussgesetz (Ausfluss durch ein dünnes Rohr $\Delta h$ unterhalb der Oberfläche, $p_1 = p_2$, $v_1 \approx 0$):
+\begin{equation*}
+  v = \sqrt{2g\Delta h}
+\end{equation*}
+
+Mit einem Stromlinienkörper können die verschiedenen Druckarten unterschieden werden:
+\begin{itemize}[noitemsep]
+  \item Einlass an der Seite und "`außen"': statischer Druck
+  \item Einlass vorne und "`außen"': Gesamtdruck
+  \item Einlass vorne und an der Seite: Prandtlsches Staurohr, Staudruck und damit Geschwindigkeit
+\end{itemize}
+
+Mit einer Venturi-Düse (Manometer mit Messung vor und in Verengung) kann der Volumenstrom bestimmt werden über
+\begin{align*}
+  & p_1 + \frac{\varrho}{2}v_1^2 = p_2 + \frac{\varrho}{2}v_2^2\\
+  \Rightarrow & p_1 - p_2 = \frac{\varrho}{2}(v_2^2 - v_1^2) = \frac{\varrho I^2}{2}\left( \frac{1}{A_2^2} - \frac{1}{A_1^2} \right)\\
+  \Rightarrow & I = A_1A_2\sqrt{\frac{2(p_1-p_2)}{\varrho(A_1^2-A_2^2)}}
+\end{align*}
+
+
+\subsection{Laminare Strömungen}
+Laminare Strömungen liegen vor, wenn sich die strömenden Schichten nicht vermischen. Für eine zwischen zwei Platten (eine ortsfest, die andere bewegt) eingeschlossene Flüssigkeit ergibt sich ein Geschwindigkeitsgefälle der Schichten und es gilt das Newtonsche Reibungsgesetz:
+\begin{equation*}
+  F_\text{R} = \eta A \frac{\text{d}v}{\text{d}h}
+\end{equation*}
+mit der Viskosität $\eta$ der Flüssigkeit (hohe Viskosität = dickflüssig).
+
+Ein laminar durchströmtes Rohr mit Länge $l$, Radius $R$ und Druckdifferenz $(p_1-p_2)$ wird nach dem Gesetz von Hagen und Poiseuille von dem Volumenstrom
+\begin{equation*}
+  I = \frac{\pi R^4(p_1-p_2)}{8\eta l}
+\end{equation*}
+durchsetzt. Herleitung:
+\begin{align*}
+  \text{Reibungskraft auf Zylinderaußenmantel} &= \text{Kraft auf Zylinderdecken durch Druckdifferenz} \\
+  \iff -\eta \cdot 2\pi r l \frac{\text{d}v}{\text{d}r} & = (p_1 - p_2)\pi r^2\\
+  \Rightarrow v(r) & = \frac{p_1-p_2}{4\eta l}(R^2-r^2)
+\end{align*}
+durch Integration und der Randbedingung $v=0$ für $r=R$. Es herrscht also ein parabolisches Geschwindigkeitsgefälle. Aufintegriert gemäß $\text{d}I = v(r) \text{d}A = 2\pi r \text{d}r v(r)$ ergibt sich das Gesetz von H und P.
+
+Reibungskraft der Rohrströmung: $F_\text{R} = 8\pi \eta l \bar v$.
+
+Stokes Reibung einer laminar umströmten Kugel: $F_\text{R} = 6\pi \eta R v$.
+
+\subsection{Turbulente Strömungen}
+Durch Turbulenzen hinter einem in eine reale Flüssigkeit oder ein reales Gas eingebrachten Körper entstehen Druckdifferenzen, die zu einer Kraft (Strömungswiderstand) in Strömungsrichtung führen:
+\begin{equation*}
+  F_\text{W} = c_\text{W}A\frac{\varrho v^2}{2}
+\end{equation*}
+Dabei gibt $c_\text{w}$ den Widerstandsbeiwert an, der zwischen 0,06 und 1,6 liegt und $A$ die der Strömung entgegengestellte Fläche.
+
+TODO: einbauen (aus wiki): woher kommt geschwindigkeitszuwachs? Energieerhaltung (mehr kin. in engstelle!)
+
+\section{Geometrische Optik, optische Instrumente}
+
+\subsection{Stichworte}
+\begin{itemize}[noitemsep]
+  \item Geometrische Optik
+  \item Snellius
+  \item Reelle und virtuelle Bilder
+  \item Abbildungsgleichung
+  \item Optische Geräte: Spiegel und Linsen
+  \item Das Auge/Brille
+  \item Optische Instrumente: Fernrohr, Mikroskop, Lupe
+  \item Wellenoptik?
+\end{itemize}
+
+\subsection{Grundlagen}
+Geometrische Optik betrachtet die Ausbreitung von "`Lichtstrahlen"'. Sie ist anwendbar, wenn die betrachteten Strukturen (Gegenstände und optische Geräte) deutlich größer sind als die Wellenlänge des Lichtes. Gemäß dem Fermatischen Prinzip befolgen Lichtstrahlen zwischen zwei Punkten auf dem kürzesten optischen Weg, der sich als Produkt von tatsächlichem Weg und dem Brechungsindex des durchquerten Materials ergibt:
+\begin{equation*}
+  L = \int n\text{d}s
+\end{equation*}
+Daraus lassen sich das Reflexionsgesetz und das Snelliussche Brechungsgesetz herleiten.
+
+\subsection{Anwendung des Fermatschen Prinzips}
+Reflexionsgesetz: Einfallswinkel = Ausfallswinkel, Strahlen und Lot liegen in einer Ebene.
+
+Herleitung: 
+\begin{align*}
+  L & = n \left( \sqrt{(x-x_1)^2+y_1^2} + \sqrt{(x'_1-x)^2 + {y'}_1^2}\right) \\
+  \frac{\text{d}L}{\text{d}x} & = n \left( \frac{x-x_1}{\sqrt{(x-x_1)^2 + y_1^2}} - \frac{x'_1-x}{\sqrt{(x'-x)^2+{y'}_1^2}} \right) \\
+  \Rightarrow \frac{\text{d}L}{\text{d}x} &= n \left( \frac{x-x_1}{s_1} - \frac{x'_1-x}{s'_1} \right) = n (\sin\alpha_1 - \sin\alpha'_1) \stackrel{!}{=} 0 \\
+  \Rightarrow & \sin\alpha_1 = \sin\alpha'_1 \Rightarrow \alpha_1 = \alpha'_1
+\end{align*}
+
+Brechungsgesetz: Der Lichtstrahl wird im optisch dichteren Medium zum Lot hin gebrochen. Die Sinusse der Winkel verhalten sich wie der Kehrwert der Brechungsindizes. Strahlen und Lot liegen in einer Ebene.
+
+Herleitung: analog.
+
+\subsection{Entstehung optischer Bilder}
+Ein reelles Bild eines Gegenstands entsteht, wenn die von den Punkten des Gegenstand ausgehenden Lichtstrahlen durch ein optisches System an einem anderen Ort vereinigt (abgebildet) werden. Reelle Bilder können durch einen Schirm sichtbar gemacht werden oder durch einen Film aufgenommen werden.
+
+Wenn durch ein optisches System von einem Punkt ausgehende Lichtstrahlen zerstreut werden, so entsteht durch rückwärtige verlängerung der Strahlen ein virtueller Bildpunkt, der zu einem virtuellen Bild gehört. Virtuelle Bilder können nur mit dem Auge (oder einer Kamera) abgebildet werden, die die Strahlen wieder bündeln.
+
+\subsection{Spiegel}
+Ebene Spiegel erzeugen aufgrund des Reflexionsgesetzes virtuelle, aufrechte, gleich große und Seitenverkehrte Bilder.
+
+Sphärischer Hohlspiegel: Die Brennweite beträgt
+\begin{equation*}
+  f \approx \frac{r}{2}
+\end{equation*}
+Herleitung: Achsnaherstrahl trifft in $A$ auf Spiegel. $\overline{MA}$ ist Einfallslot. Der Einfallswinkel $\alpha$ tritt auch zwischen Lot und optischer Achse auf. Der reflektierte Strahl schneidet die optische Achse in $F$. $\Delta MFA$ ist gleichschenklig und da $\alpha \approx 0$ ist $\cos \alpha \approx 1 = (r/2) / (r-f)$.
+
+Für die Konstruktion von Abbildungen gilt:
+\begin{itemize}[noitemsep]
+  \item Parallelstrahlen tauschen mit Brennpunktsstrahlen
+  \item Mittelpunktsstrahlen bleiben Mittelpunktsstrahlen
+\end{itemize}
+
+Für achsennahe Strahlen gilt (die $f$ sind nur näherungsweise, da die Lote vor dem Spiegel auftreffen)
+\begin{align*}
+  \frac{\overline{PQ}}{\overline{P'Q'}} = \frac{g-f}{f} &= \frac{f}{b-f}\\
+  \Rightarrow (g-f)(b-f) &= f^2 \\
+  \Rightarrow bg - bf - gf + f^2 &= f^2 \\
+  \Rightarrow bg - f(b+g) &= 0\\
+  \Rightarrow bg &= f(b+g) \\
+  \Rightarrow \frac{bg}{f} &= b+g \\
+  \Rightarrow \frac{1}{f} &= \frac{b+g}{bg}\\
+  \Rightarrow \frac{1}{f} &= \frac{1}{b} + \frac{1}{g}
+\end{align*}
+
+Das Bild wird gemäß dem Abbildungsmaßstab
+\begin{equation*}
+  \beta = \frac{B}{G} = -\frac{b}{g} = \frac{f}{f-g}
+\end{equation*}\todo{wie?}
+vergrößert oder verkleinert.
+
+Mit negativem $f$ gelten die Gleichungen auch für Wölbspiegel.
+
+\subsection{Linsen}
+Sphärische Linsen sind durchsichtige Körper, die von Kugelflächen (oder Kugelfläche und Ebene) begrenzt werden. Konvex = nach außen gewölbt, konkav = nach innen gewölbt. Sammellinsen sind in der Mitte dicker, Zerstreuungslinsen am Rand.
+
+Linsenschleifergleichung:
+\begin{equation*}
+  \frac{1}{f} = (n-1)\left( \frac{1}{r_1} - \frac{1}{r_2} \right)
+\end{equation*}
+\todo{Herleitung?}
+
+Konstruktion von Bildern erfolgt wie beim Hohlspiegel. Je nach Gegenstands- und Bildweite ergibt sich die Tabelle \ref{tab:AbbildungenLinse}
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{llll}
+    $g$ & $b$ & $\beta$ & Bild\\
+    \hline
+    $g > 2f$ & $f<b<2f$ & $-1 < \beta <0$ & reell, umgekehrt, verkleinert\\
+    $g=2f$ & $b=2f$ & $\beta = -1$ & reell, umgekehrt, gleich groß\\
+    $2f > g > f$ & $2f < b$ & $\beta < -1$ & reell, umgekehrt, vergrößert\\
+    $g=f$ & $b \to \infty$\\
+    $f > g$ & $b<0, |b| > g$ & $\beta > 1$ & virtuell, aufrecht, vergrößert
+  \end{tabular}
+  \caption{Abbildungen mit Linse/Hohlspiegel}
+  \label{tab:AbbildungenLinse}
+\end{table}
+
+Zwei dünne Linsen im kleinen Abstand $e$ voneinander bilden ein Linsensystem mit der Gesamtbrennweite
+\begin{align*}
+  \frac{1}{f} & = \frac{f_1f_2}{f_1+f_2-e}\\
+  \frac{1}{f} & = \frac{1}{f_1} + \frac{1}{f_2} \qquad\text{falls } e \ll |f_1+f_2|
+\end{align*}
+
+Mit der Definition der Brechkraft als Dioptrie $D := 1/f$ ergibt sich
+\begin{equation*}
+  D = D_1 + D_2
+\end{equation*}
+
+
+\subsection{Das Auge}
+Im menschlichen Auge wird durch die hinter der Pupille liegende Linse ein reelles, umgekehrtes, verkleinertes Bild der Umgebung auf die an der hinteren Augeninnenwand liegende Netzhaut geworfen. Dort nehmen die für das Sehen zuständigen Sinneszellen (Zapfen und Stäbchen) die optischen Reize auf und leiten sie an das Gehirn weiter. Um Gegenstände in verschiedenen Entfernungen scharf abbilden zu können, muss die Brennweite der Linse reguliert werden, da die Geometrie des Auges (Abstand Linse-Netzhaut) fest ist. Durch verformung des Augapfels (zu lang) oder nachlassende Elastizität der Linse kann es zu Kurzsichtigkeit, durch einen zu kurzen Augapfel zu Weitsichtigkeit kommen. Zur Korrektur werden Zerstreuungslinsen (Weitsichtigkeit) oder Sammellinsen (Kurzsichtigkeit) eingesetzt.
+
+Zur bewertung von optischen Instrumenten wird die deutliche Sehweite definiert als der Abstand, unter dem ein Gegenstand mit bloßem Auge ohne große Anstrengung betrachtet werden kann.
+\begin{equation*}
+  s_0 = \unit[25]{cm}
+\end{equation*}
+
+\subsection{Optische Instrumente}
+Da das Auge durch die Größe der Sehzellen in seiner Auflösungsfähigkeit begrenzt ist, werden optische Instrumente eingesetzt, wenn weit entfernte oder sehr kleine Objekte betrachtet werden.
+
+\subsubsection{Lupe}
+Eine Lupe ist eine Sammellinse mit kurzer Brennweite. Wird ein Gegenstand in der Brennebene der Linse platziert, so treten von jedem Objektpunkt ausgehende Strahlen parallel aus der Linse aus. Für den obersten Objektpunkt ergibt sich der Sehwinkel $\tan  \varepsilon = G/f$. Würde das Objekt in deutlicher Sehweite betrachtet werden, wäre der Winkel $\tan \varepsilon_0 = G/s_0$. Die Vergrößerung einer Lupe ergibt sich aus dem Verhältnis der Sehwinkel:
+\begin{equation*}
+  \Gamma := \frac{\tan \varepsilon}{\tan \varepsilon_0} = \frac{s_0}{f}
+\end{equation*}
+
+\subsubsection{Mikroskop}
+Um noch weiter als mit einer Lupe vergrößern zu können, werden Mikroskope mit zwei Linsen(systemen) verwendet. Die dem Objekt näherliegende Linse wird als Objektiv, die dem Auge näherliegende als Okular (lat. oculus: das Auge). Durch das Objektiv wird ein vergrößertes, kopfstehendes reelles Zwischenbild erzeugt. Um das Zwischenbild möglichst groß werden zu lassen, ist $g$ nur wenig kleiner als $f_\text{Ob}$. Das Okular wird so verschoben, dass das reelle Bild in der Brennebene liegt. Die Vergrößerung ergibt sich zu
+\begin{align*}
+  \Gamma &= \beta_\text{Ob}\Gamma_\text{Ok} \\
+  & = \frac{b}{g} \cdot \frac{s_0}{f_\text{Ok}}\\
+  & \approx \frac{ts_0}{f_\text{Ob}f_\text{Ok}}
+\end{align*}
+
+\subsubsection{Fernrohre}
+Kepler: Besteht aus zwei Sammellinsen. Bei einem Fernrohr ist die Gegenstandsweite $\approx\infty$, so dass das reelle Bild des betrachteten Objektes in der Brennebene des Objektivs entsteht. Dieses wird durch das Okular als Lupe betrachtet. Geometrisch ergibt sich
+\begin{align*}
+  \Gamma &= \frac{\tan\varepsilon}{\tan\varepsilon_0} \\
+   & = \frac{B}{f_\text{Ok}} \cdot \frac{f_\text{Ob}}{B}\\
+   & = \frac{f_\text{Ob}}{f_\text{Ok}}
+\end{align*}
+Das Bild ist kopfstehend.
+
+Galileo: Okular ist Zerstreuungslinse, dadurch zwar geringere Vergrößerung, aber aufrechtes Bild.
+
+\subsection{Abbildungsfehler}
+Durch lichtbrechende optische Systeme können Abbildungsfehler entstehen, die ggf. durch aufwändige Korrekturmaßnahmen ausgeglichen werden können.
+
+Da der Brechungsindex eines Materials wellenlängenabhängig ist, werden verschiedene Farben innerhalb eines Strahlengangs unterschiedlich stark beeinflusst, so dass sich je nach Farbe unterschiedliche Bildebenen ergeben (chromatische Aberration).
+
+Die sphärische Aberration entsteht bei spährischen Linsen dadurch, dass mit wachsender Entfernung von der optischen Achse die Brennweite kleiner wird (vgl. Näherungen oben!).
+
+Astigmatismus (schiefer Bündel) tritt bei abseits der optischen Achse liegenden Punkten auf, da die Brennebene der Meridionalebene (aufgespannt durch optische Achse und Objektpunkt) vor der Brennebene der Sagittalebene (senkrecht zur Meridionalebene) liegt.
+
+
+\section{Maxwellgleichungen}
+\subsection{Stichworte}
+\begin{itemize}[noitemsep]
+  \item Maxwellgleichungen in Differentialform
+  \item Umwandlungssätze
+  \item Maxwellgleichungen in Integralform
+  \item Experimente zu den Gleichungen
+  \item Vakuum vs.\ Materie
+\end{itemize}
+
+\subsection{Grundlagen}
+Die Maxwellgleichungen beschreiben das Zusammenspiel von magnetischen und elektrischen Feldern. Felder sind im allgemeinen Raumbereiche, in denen auf Körper mit bestimmten Eigenschaften Kräfte wirken. Beispiele sind das Gravitationsfeld, das von Massen erzeugt wird und auf Massen stets anziehend wirkt: $\vec F_\text{G}(\vec r) = m \vec G(\vec r)$, oder das elektrische Feld, das von Ladungen erzeugt wird und je nach Polarität der Ladung anziehend oder abstoßend wirken kann.
+
+\subsection{Maxwellgleichungen in Differentialform}
+Die makroskopischen Maxwellgleichungen in Materie lauten
+\begin{align}
+  \label{equ:MaxDiff1}  \vec \nabla \cdot \vec D &= \varrho_\text{frei} \tag{M1d}\\
+  \label{equ:MaxDiff2}  \vec \nabla \cdot \vec B &= 0 \tag{M2d}\\
+  \label{equ:MaxDiff3}  \vec \nabla \times \vec E &= -\frac{\partial \vec B}{\partial t} \tag{M3d}\\
+  \label{equ:MaxDiff4}  \vec \nabla \times \vec H &= \vec j_\text{frei} + \frac{\partial \vec D}{\partial t} \tag{M4d}
+\end{align}
+
+Dabei steht (\ref{equ:MaxDiff1}) für das Gaußsche Gesetz: Ladungen sind Quellen des elektrischen Feldes. Die Gleichung (\ref{equ:MaxDiff2}) wird als Gaußsches Gesetz für Magnetfelder bezeichnet und drückt die Tatsache aus, dass magnetische Felder quellenfrei sind (es gibt keine magnetischen Monopole).
+
+Das Induktionsgesetz wird durch Gleichung (\ref{equ:MaxDiff3}) beschrieben: zeitliche Änderungen eines Magnetfeldes führen zu einem elektrischen Wirbelfeld. Die letzte Gleichung schließlich ist das (erweiterte) Durchflutungsgesetz und besagt, dass elektrische Ströme zu einem magnetischen Wirbelfeld führen.
+
+\subsection{Umwandlungssätze}
+Um zwischen den Differential- und Integralformen der Maxwellgleichungen zu wechseln, werden der Gaußsche Integralsatz und der Satz von Stokes verwendet. Der Gaußsche Integralsatz lautet formal
+
+\begin{equation*}
+  \iiint_V \text{div} \vec F \text{d}V = \oiint_S \vec F \cdot \vec n \text{d}S
+\end{equation*}
+
+mit einem stetig differenzierbarem Vektorfeld $\vec F$ in einem Volumen $V$, das von dem orientierten Rand $S$ begrenzt wird. Bildliches Beispiel: $\vec F$ ist das Strömungsfeld einer Flüssigkeit. Um den Fluss in ein oder aus einem Gebiet $V$ zu bestimmen, gibt es zwei äquivalente Möglichkeiten: $\oint_S \vec F \cdot \vec n \text{d}S$ beschreibt den aufsummierten Fluss durch die Begrenzungsfläche, während $\int_V \text{div} \vec F \text{d}V$ die Quellen und Senken innerhalb des Volumens summiert.
+
+Der Stokessche Integralsatz verknüpft die Rotation eines Feldes $\vec F$ in einer Fläche $S$ mit dem Feld entlang des Randes $R$:
+\begin{equation*}
+  \iint_S \vec \nabla \times \vec F \cdot \text{d}S = \oint_R \vec F \cdot \text{d}r
+\end{equation*}
+
+\subsection{Maxwellgleichung in Integralform}
+\begin{align}
+  \label{equ:MaxInt1} \oiint \vec D \cdot \text{d}\vec A & = \iiint_V \varrho \text{d}V  = Q \tag{M1i}\\
+  \label{equ:MaxInt2} \oiint \vec B \cdot \text{d}\vec A & = 0 \tag{M2i}\\
+  \label{equ:MaxInt3} \oint \vec E \cdot \text{d} \vec s & = - \iint \frac{\partial \vec B}{\partial t} \cdot \text{d}\vec A \tag{M3i}\\
+  \label{equ:MaxInt4} \oint \vec H \cdot \text{d}\vec s & = \iint \vec j_\text{frei} \cdot \text{d}\vec A + \iint \frac{\partial \vec D}{\partial t} \cdot \text{d}\vec A \tag{M4i}
+\end{align}
+
+Die Interpretationen lauten: zu (\ref{equ:MaxInt1}): Der Fluss durch die Oberfläche eines Volumen ist proportional zu der eingeschlossenen Ladung $Q$. Insbesondere ist der Gesamtfluss durch jede Oberfläche, die eine Gesamtladung von 0 umschließt ebenfalls 0. Analog gilt (\ref{equ:MaxInt2}) mit der Einschränkung, dass es keine Quellen des magnetischen Feldes gibt. (\ref{equ:MaxInt3}) beschreibt das Induktionsgesetz: das elektrische Feld entlang der Umgrenzung einer von einem Magnetfeld durchsetzten Fläche wird von der Änderung des Feldes oder der Änderung der Fläche verursacht.
+Das Durchflutungsgesetz (\ref{equ:MaxInt4}) beschreibt das Magnetfeld entlang einer geschlossenen Linie, das von dem eingeschlossenen freien Strom $\vec j$ und der zeitlichen Änderung des elektrischen Flusses ist.
+
+\subsection{M1: Berechnung von Feldern einer Ladungsverteilung}
+Feld einer Punktladung im Vakuum: betrachte Kugelschalen mit Radius $r$ um die Ladung $Q$ (aus Symmetriegründen muss das Feld kugelsymmetrisch sein):
+\begin{align*}
+  \oiint_\text{Kugel} \varepsilon_0 \vec E \cdot \text{d}\vec A & = Q  \qquad |\vec E| \text{ const und } \vec E \parallel \text{d}\vec A\\
+  \Rightarrow 4\pi \varepsilon_0 r^2 E_r & = Q \\
+  \Leftrightarrow E_r & = \frac{q}{4\pi \varepsilon_0 r^2}
+\end{align*}
+
+Gleiches gilt auch für eine Ladungsverteilung auf einer Kugelschale. Betrachtet man das Feld im inneren einer homogen geladene Kugel mit Radius $R$ und Gesamtladung $Q$, so ist die umschlossene Ladung von $r$ abhängig:
+
+\begin{equation*}
+  E_r = \frac{Q'}{4\pi\varepsilon_0 r^2} = \frac{Q}{\frac{4}{3}\pi R^3} \frac{4}{3}\pi r^3 \frac{1}{4\pi \varepsilon_0 r^2} = r \frac{Q}{4\pi\varepsilon_0 R^3}
+\end{equation*}
+Das Feld nimmt also proportional zu dem Radius zu.
+
+Feld einer homogen geladenen Platte: betrachte eine (unendlich große) ebene Platte mit einer Flächenladungsdichte $\sigma = \frac{\Delta Q}{\Delta A}$. Aus Symmetriegründen muss das Feld senkrecht auf der Platte stehen und auf den beiden Seiten der Platte gespiegelt sein. Als Integrationsfläche bietet sich deshalb ein Zylinder mit Gesamtdeckelfläche $2A$ an. Wieder sind Feld und Fläche parallel orientiert, so dass sich
+
+\begin{align*}
+  \oiint_\text{Zylinder} \varepsilon_0 \vec E \text{d}\vec A = 2\varepsilon_0 A E = \sigma A \\
+  \Rightarrow E = \frac{\sigma}{2\varepsilon_0}
+\end{align*}
+ergibt.
+
+\subsection{M3: Das Induktionsgesetz}
+
+\begin{equation*}
+  U_\text{ind} = -\frac{\text{d}\Phi}{\text{d}t} = -\frac{\text{d}}{\text{d}t} \int \vec B \cdot \text{d}\vec A
+\end{equation*}
+
+mit der \emph{Lenzschen Regel}, die besagt, dass induzierte Strom so gerichtet ist, dass sein Magnetfeld der induzierenden Ursache entgegenwirkt.
+
+
+\subsection{Herleitung der em-Welle aus Maxwellgleichungen}
+Im ladungsfreien Vakuum bildet man rot (\ref{equ:MaxDiff3}):
+\begin{align*}
+  \vec \nabla \times (\vec \nabla \times \vec E) & = - \vec \nabla \times \frac{\partial \vec B}{\partial t} \qquad \text{Vektoranalysis}\\
+  \vec \nabla (\vec \nabla \cdot \vec E) - \vec \Delta \vec E & = - \frac{\partial}{\partial t} \vec \nabla \times \vec B \qquad \text{(\ref{equ:MaxDiff1}), (\ref{equ:MaxDiff4})}\\
+  \vec \Delta \vec E & = \mu_0\varepsilon_0 \frac{\partial^2}{\partial t^2} \vec E
+\end{align*}
+
+\subsection{Zusammenhang der Felder im Vakuum und in Materie}
+Die elektrische Feldstärke $\vec E$ wird in Materie zur elektrischen Flussdichte $\vec D$, die über die elektrische Polarisation $\vec P$ des Materials verknüpft ist:
+\begin{equation*}
+  \vec D = \varepsilon_0 \vec E + \vec P
+\end{equation*}
+
+Analoges gilt für die magnetische Feldstärke $\vec H$, die zur magnetischen Flussdichte $\vec B$ wird ($\vec J$: magnetische Polarisation):
+\begin{equation*}
+  \vec B = \mu_0 \vec H + \vec J
+\end{equation*}
+
+In homogenen, isotropen Materialien sind $\vec E$ und $\vec D$ sowie $\vec H$ und $\vec B$ parallel und nur durch die Permittivität bzw die Permeabilität skaliert:
+\begin{equation*}
+  \vec D = \varepsilon_0\varepsilon_\text{r} \vec E \qquad \vec B = \mu_0\mu_\text{r} \vec H
+\end{equation*}
+
+Während die relative Permittivität $\varepsilon_\text{r}$ in der Regel größer als eins ist, werden Stoffe mit unterschiedlicher relativer Permeabilität $\mu_\text{r}$ klassifiziert in diamagnetische Stoffe ($\mu_\text{r} < 1$), die in ihrem Inneren das magnetfeld abschwächen und aus einem inhomogenen Magnetfeld herausstreben, paramagnetische Stoffe mit $\mu_\text{r}>1$, die das Feld in ihrem Inneren verstärken, sowie ferromagnetische Stoffe mit $\mu_\text{r} \gg 1$, die darüberhinaus Hysterese zeigen.
+
+
+\section{Zustandsänderungen von Gasen}
+
+\subsection{Stichworte}
+\begin{itemize}[noitemsep]
+  \item ideales und reales Gas
+  \item Hauptsätze der Thermodynamik
+  \item Prozesse (reversibel, irreversibel)
+  \item Carnot-Prozess, Wirkungsgrad
+  \item Zustandsänderungen: iso\dots, adiabatisch
+  \item Entropie
+\end{itemize}
+
+\subsection{Das ideale Gas}
+Ein ideales Gas besteht aus vielen Massepunkten, die sich kräftefrei durch den ihnen zur verfügung stehenden Raum bewegen. Dabei stoßen sie untereinander und mit den Wänden zusammen. Reale Gase können oft gut genug durch das ideale Gas modelliert werden, solange die Temperatur hoch genug und der Druck niedrig genug ist. Durch Versuche mit solchen Gasen findet man verschiedene Zusammenhänge:
+\begin{itemize}[noitemsep]
+  \item Bei konstanter Temperatur ist der Druck umgekehrt proportional zum Volumen, $p \propto V^{-1}$, Gesetz von Boyle-Mariotte.
+  \item Bei konstantem Druck sind Volumen und Temperatur proportional zueinander, $V \propto T$, Gesetz von Gay-Lussac.
+  \item Bei konstantem Volumen sind Druck und Temperatur proportional zueinander, $p \propto T$ (Gesetz von Amonotons).
+\end{itemize}
+Zusammengefasst ergeben diese Proportionalitäten das ideale Gasgesetz, wobei sich die Proportionalitätskonstante aus der Teilchenanzahl $n$ und der universellen Gaskonstante $R$ ergeben:
+\begin{equation*}
+  pV = nRT
+\end{equation*}
+
+Der Satz von Avogadro besagt, dass gleiche Volumina idealer Gase bei gleichem Druck und gleicher Temperatur gleich viele Teilchen beinhalten. Unter Normbedingungen nimmt ein Mol eines idealen Gases ein Volumen von knapp $\unit[22.5]{l}$ ein.
+
+\subsection{Das reale Gas}
+Die Beschreibung durch ein ideales Gas versagt, wenn Drücke hoch und Temperaturen niedrig sind. Insbesondere kann ein ideales Gas nicht kondensieren, so dass nur deutlich entfernt vom Siedepunkt eines Stoffes die Näherung des idealen Gases verwendet werden kann.
+
+Durch die van-der-Waals-Gleichung werden zwei Probleme des idealen Gasgesetzes durch stoffabhängige Korrekturfaktoren behoben:
+\begin{itemize}[noitemsep]
+  \item Neben elastischen Stöße treten auch anziehende Wechselwirkungen zwischen den Teilchen auf, die den Druck eines realen Gases senken. Dieser sogenannte Binnendruck wird durch den Parameter $a$ beschrieben.
+  \item Eigenvolumen der Gasteilchen: die Gasmoleküle nehmen ein Volumen ein, das eine beliebige Kompression verhindert. Dies wird durch das Kovolumen $b$ berücksichtigt, das in etwa dem Volumen von $\unit[1]{mol}$ Gasmoleküle entspricht.
+\end{itemize}
+
+Die Gleichung (van-der-Waals-Gleichung) für das reale Gas lautet
+\begin{equation*}
+  RT = \left( p + \frac{a}{V_m^2} \right) (V_m-b) \qquad \text{mit } V_m = \frac{V}{n}
+\end{equation*}
+
+\includegraphics[width=\textwidth]{vdw.pdf}
+
+\subsection{1. Hauptsatz}
+Wärme ist eine Energieform, die in Stoffen gespeichert werden kann. Dabei werden Wärmemengen $Q$ übertragen, die zu einer Temperatur-, Volumens- oder Aggregatzustandsänderung führen können. 
+Eine Gasmenge (thermodynamisches System) hat bei gegebenen Zustandsgrößen $p$, $V$, $T$ eine eindeutig bestimmte \emph{innere Energie} $U$. Änderungen dieser Größe erfolgen durch Wärmeaustausch oder Arbeit, die am oder vom System verrichtet wird.
+
+\begin{align}
+  \text{d}U & = \text{d}Q + \text{d}W  \tag{1. HS} \label{equ:1HS} \\
+  & = \text{d}Q - p\text{d}V \notag
+\end{align}
+
+Die Arbeit (Volumenarbeit) kann über
+\begin{equation*} 
+  W = -\int_{s_1}^{s_2}F\text{d}s = -\int_{s_1}^{s_2}pA\text{d}s = -\int_{V_1}^{V_2}p\text{d}V
+\end{equation*}
+zu $\text{d}W = -p\text{d}V$ umgeschrieben werden, was zu der alternativen Darstellung führt.
+
+Die spezifische Wärmekapazität $c$ eines Stoffes gibt an, wie viel Wärme für eine Temperaturänderung benötigt wird:
+\begin{equation*}
+  c = \frac{1}{m}\frac{\text{d}Q}{\text{d}T}
+\end{equation*}
+
+Bei Gasen muss unterschieden werden, ob Druck oder Volumen dabei konstantgehalten werden. Mit dem (\ref{equ:1HS}) ergibt sich
+\begin{equation*}
+  c = \frac{1}{m}\frac{\text{d}Q}{\text{d}T} = \frac{1}{m}\left( \frac{\text{d}U}{\text{d}{T}} + p \frac{\text{d}V}{\text{d}T} \right)
+\end{equation*}
+und daraus die spezifische Wärmekapazität bei konstantem Volumen 
+\begin{equation}
+  c_V = \frac{1}{m}\frac{\text{d}U}{\text{d}{T}} \iff \text{d}U = mc_V\text{dT}.
+  \label{equ:wKapConstV}
+\end{equation}
+Für die spezifische Wärmekapazität bei konstantem Druck verwendet man die Ableitung \todo{wonach?!} des idealen Gasgesetzes:
+\begin{equation*}
+  p\text{d}V + V\text{d}p = nR \text{d}T = mR'\text{d}T
+\end{equation*} mit der speziellen Gaskonstante $R' = R/M$, $M$ ist Molmasse des Gases, und erhält für konstantem Druck den Ausdruck $p\text{dV} = mR'\text{d}T$
+\begin{equation}
+  c_p = \frac{1}{m}\left(  \frac{\text{d}U}{\text{d}{T}} +mR'\right) = c_V + R'
+  \label{equ:wKapConstP}
+\end{equation}
+
+\subsection{Zustandsänderungen}
+\subsubsection{Isobar}
+Wenn der Druck konstant gehalten wird, so ergibt sich aus der differenzierten idealen Gasgleichung $p\text{d}V = mR'\text{d}T$ und damit der (\ref{equ:1HS}) zu $\text{d}U = \text{d}Q - mR'\text{d}T$. Dies kann mit (\ref{equ:wKapConstP}) umgestellt werden zu $\text{d}Q = mc_p\text{d}T$. Verknüpft mit (\ref{equ:wKapConstV}) ergibt sich
+
+\begin{equation*}
+  \frac{\text{d}U}{\text{d}Q} = \frac{c_V}{c_p} \iff \text{d}U = \frac{c_V}{c_p}\text{d}Q
+\end{equation*}
+
+Die zugeführte Wärme geht also nur zum Teil auf die innere Energie über, der Rest wird für die Volumenarbeit aufgewendet.
+
+\subsubsection{Isochore}
+Da $V=\text{const}$, ergibt sich der (\ref{equ:1HS}) zu $\text{d}U = \text{d}Q$, sämtliche Wärmeenergie wird in innerer Energie aufgenommen.
+
+\subsubsection{Isotherm}
+Wegen $\text{d}T=0$ ist auch $\text{d}U=0$ (\ref{equ:wKapConstV}\todo{die ist aber für V=const?}) und damit $\text{d}Q = p\text{d}V = -\text{d}W$, die zugeführte Wärme wird also vollständig in Volumenarbeit umgesetzt.
+
+\subsubsection{Adiabatisch/Isentrop/Polytrop}
+Adiabatisch bedeutet "`ohne Wärmeaustausch"', also $\text{d}Q = 0$, $\text{d}U = -p\text{d}V = \text{d}W$. Es gibt adiabatische Expansion, bei der die Temperatur abnimmt, sowie adiabatische Kompression, bei der die Temperatur zunimmt. Eine solche Zustandsänderung wird durch
+\begin{equation}
+  pV^\kappa = \text{const} \qquad TV^{\kappa-1} = \text{const} \qquad Tp^{\frac{1-\kappa}{\kappa}} = \text{const}
+  \label{equ:Adiabatisch}
+\end{equation}
+mit dem Adiabatenexponenten $\kappa = c_p/c_V$ beschrieben.
+
+Ideale isotherme ($pV^1 = \text{const}$) oder isentrope ($pV^\kappa=\text{const}$, $\kappa > 1$) Vorgänge sind nicht realisierbar. Bei den real auftretenden polytropen Zustandsänderungen mit $pV^k =\text{const}$ nimmt der Polytropenexponent $k$ werte zwischen 1 und $\kappa$ an.
+
+\subsubsection{Entropie und Enthalpie}
+Die Enthalpie
+\begin{equation*}
+  H = U + pV
+\end{equation*}
+
+und die Entropie
+\begin{equation*}
+  \Delta S = \frac{Q_\text{rev}}{T}
+\end{equation*}
+sind dusselige Größen!
+
+\subsection{2. Hauptsatz}
+Der 1. Hauptsatz macht nur eine Aussage über die Energiebilanz bei Umwandlungen eines thermodynamischen Systems. Er schließt beispielsweise nicht aus, dass Wärme komplett in mechanische Arbeit umgewandelt wird. Die Erfahrung zeigt, dass dies nicht möglich ist, umgekehrt (Arbeit zu Wärme) jedoch sehr wohl. Dies wird durch den 2. Hauptsatz ausgedrückt:
+
+
+"`Es gibt keine Zustandsänderung, deren einziges Ergebnis die Übertragung von Wärme zu einem Körper höherer Temperatur ist"'.\\
+Äquivalent: "`Es ist unmöglich, eine periodisch arbeitende Maschine zu bauen, die ausschließlich durch Abkühlung eines Wärmereservoirs mechanische Arbeit verrichtet"'.\\
+
+Folgen:
+\begin{itemize}[noitemsep]
+  \item Wärme fließt immer von warm zu kalt.
+  \item Wärme kann nicht vollständig in Arbeit umgewandelt werden.
+  \item Der Wirkungsgrand des Carnot-Prozess kann nicht übertroffen werden. Alle reversiblen Kreisprozesse haben denselben Wirkungsgrad wie der Carnot-Prozess. Alle irreversiblen Kreisprozesse haben geringenren Wirkungsgrad.
+\end{itemize}
+
+
+\subsection{3. Hauptsatz}
+
+Der absolute Temperaturnullpunkt ist unerreichbar.
+\todo{allg. pv-Diag, Arbeit = integral}
+
+\subsection{Der Carnot-Prozess}
+Der Carnot-Prozess ist ein Gedankenexperiment, das einen idealen Kreisprozess entwirft. Er besteht aus den vier Zustandsänderungen
+\begin{enumerate}[noitemsep]
+  \item isotherme Expansion (Wärmezufuhr notwendig, Arbeit gewonnen)
+  \item isenthrope Expansion (isoliert)
+  \item isotherme Kompression (Wärmeabfuhr notwendig, Arbeit aufgewendet)
+  \item isenthrope Kompression (isoliert)
+\end{enumerate}
+
+Die einzelnen Schritte werden wie folgt bilanziert:
+\begin{align*}
+  W_\text{AB} & = - \int_{V_\text{A}}^{V_\text{B}}p\text{d}V = - nRT_1 \int_{V_\text{A}}^{V_\text{B}} \frac{1}{V}\text{d}V = nRT_1 \ln\left( \frac{V_A}{V_B} \right)  < 0 \\
+  W_\text{BC} & = mc_\text{V}(T_2-T_1) \\
+  W_\text{CD} & = nRT_2\ln\left( \frac{V_\text{C}}{V_\text{D}} \right)  > 0\\
+  W_\text{DA} & = mc_\text{V}(T_1-T_2) = - W_\text{BC}
+\end{align*}
+
+Die Gesamtarbeit, die die Maschine abgibt, errechnet sich zu
+\begin{equation*}
+  |W| = |W_\text{AB} + W_\text{CD}| = nRT_1\ln\left( \frac{V_\text{A}}{V_\text{B}} \right) + nRT_2 \ln \left( \frac{V_\text{C}}{V_\text{D}} \right)
+\end{equation*}
+Um dies zu vereinfachen, verwendet man die Beziehung $TV^{\kappa-1} = \text{const}$ (\ref{equ:Adiabatisch}) für die isentropen Übergänge:
+\begin{equation*}
+  T_1V_\text{B}^{\kappa-1} = T_2V_\text{C}^{\kappa-1},~ T_1V_\text{A}^{\kappa-1} = T_2V_\text{D}^{\kappa-1} \Rightarrow \frac{V_\text{B}}{V_\text{A}} = \frac{V_\text{C}}{V_\text{D}} \Rightarrow \ln \left( \frac{V_\text{C}}{V_\text{D}} \right) = - \ln \left( \frac{V_\text{A}}{V_\text{B}} \right)
+\end{equation*}
+
+Also ergibt sich die abgegebene Arbeit zu
+\begin{equation*}
+  |W| = nR(T_1-T_2)\ln\left( \frac{V_\text{A}}{V_\text{B}} \right)
+\end{equation*}
+
+und der Wirkungsgrad, der sich als Quotient von geleisteter Arbeit zu zugeführter Wärme berechnet ist
+\begin{equation*}
+  \eta = \frac{|W|}{Q_\text{AB}} = \frac{T_1 - T_2}{T_1}
+\end{equation*}
+
+Dieser Wirkungsgrad ist nicht zu übertreffen, wird andererseits aber auch von jedem komplett reversiblen Kreisprozess erreicht: angenommen, es gäbe eine besseren Kreisprozess, so könnte man die Arbeit dieses Prozesses dazu verwenden, um einen Carnot-Prozess anzutreiben, der das warme Reservoir des ersten Prozesses weiter erwärmt und das kalte weiter abkühlt. Dadurch würde ohne weitere Energiezufuhr Wärme von kalt zu warm transportiert, was dem 2. Hauptsatz widerspricht.
+
+\subsection{Kinetische Gastheorie}
+Durch statistische Betrachtungen eines Gases lässt sich die sonst nur experimentell gefundene Gleichungen für das ideale Gas mathematisch herleiten.
+
+Für den Druck eines Gases betrachtet man die durch Stöße auf die Gefäßwände übertragene Kraft. Dazu betrachtet man ein Teilchen der Masse $\mu$, das sich mit der Geschwindigkeit $\vec v$ duch ein Gefäß der Breite $l$ und des Volumens $V$ bewegt. Betrachte zunächst nur die $x$-Komponente: bei jedem Stoß mit einer Wand überträgt es den Impuls $\Delta p_x = \mu v_x - (-\mu v_x) = 2\mu v_x$. Zwischen zwei Stößen gegen dieselbe Wand vergeht die Zeit $\Delta t = 2l/v_x$. Mit Newton ergibt sich
+\begin{equation*}
+  F = \frac{\text{d}p}{\text{d}t} = \frac{\Delta p_x}{\Delta t} = \frac{\mu v_x^2}{l}, \quad p = \frac{F}{A} = \frac{\mu v_x^2}{Al} = \frac{\mu v_x^2}{V}
+\end{equation*}
+
+Für $N$ isotrop durch den Behälter fliegenden Teilchen und dem mittlerem Geschwindigkeitsquadrat $\overline{v^2} = \overline{v_x^2} + \overline{v_y^2} + \overline{v_z^2} = 3 \overline{v_x^2}$ ergibt sich die Grundgleichung der kinetischen Gastheorie:
+\begin{equation*}
+  pV = \frac{1}{3} N \mu \overline{v^2}
+\end{equation*}
+Ein Vergleich mit der idealen Gasgleichung zeigt, dass das mittlere Geschwindigkeitsquadrat nur von der Temperatur abhängt, ein Vergleich liefert
+\begin{equation*}
+  \overline{v^2} = \frac{3kT}{\mu}
+\end{equation*}
+mit der Boltzmannkonstante $k := R/N_\text{A}$. Multiplikation mit $\mu/2$ liefert die kinetische Energie eines Teilchens:
+\begin{equation*}
+  E_\text{kin} = \frac{\mu v^2}{2} = \frac{3}{2}kT
+\end{equation*}
+und da die kinetische Energie die einzige eines (einatomigen) Gases ist, ist die innere Energie
+\begin{equation*}
+  U = \frac{3}{2}nRT
+\end{equation*}
+Wegen (\ref{equ:wKapConstV}) ergibt sich die Molwärme (molare Wärmekapazität) zu
+\begin{equation*}
+  C_\text{mV} = \frac{1}{n}\frac{\text{d}U}{\text{d}T} = \frac{3}{2}R
+\end{equation*}
+
+\subsection{Wärmeleitung}
+Wenn zwei Körper unterschiedlicher Temperatur in Kontakt stehen, so findet zwischen beiden Wärmeleitung (nach dem "`0. Hauptsatz"' vom warmen zum kalten Körper) statt. Die übertragene Wärmeenergie ist dabei der Kontaktfläche $A$, der Zeit $t$ und der Temperaturdifferenz $\Delta T$ proportional sowie der Wanddicke $l$ umgekehrt proportional.
+\begin{equation*}
+  Q = \lambda \frac{At\Delta T}{l}
+\end{equation*}
+Die Proportionalitätskonstante $\lambda$ ist die Wärmeleitfähigkeit. Günstig ist die Einführung des Wärmeleitwiderstandes eines Quaders
+\begin{equation*}
+  R_\lambda = \frac{1}{\lambda}\frac{l}{A}
+\end{equation*}
+so dass sich der Wärmestrom $\Phi := \dot Q$ schreiben lässt als
+\begin{equation*}
+  \Phi = \frac{\Delta T}{R_\lambda}
+\end{equation*}
+
+
+\section{Atomphysik}
+
+\subsection{Stichworte}
+\begin{itemize}[noitemsep]
+  \item Überblick über Atommodelle: Dalton, Rutherford, Bohr, modern
+  \item Rutherford: Ausgang, Versuch, neues Modell
+  \item Bohr: Probleme bei Rutherford, Postulate
+  \item H-Atom: Herleitung der Spektrallinien (Rydberg)
+  \item Schrödinger: Gleichung, Kasten (und Coulomb?), Quantenzahlen
+  \item Versuche: Franck-Hertz, Stern-Gerlach, Zeeman
+  \item Heisenberg, Compton
+\end{itemize}
+
+\subsection{Atommodelle}
+Bereits die antiken Griechen sind der Frage nach den kleinsten Teilchen nachgegangen. Aus der Überzeugung heraus, dass es von jedem Stoff ein kleinstes, unteilbares Teilchen geben muss, entstand das Teilchenmodell von Demokrit (400 V.\,Chr., das unterschiedliche, kleinste Teilchen postuliert, aus denen alles zusammengesetzt ist. Das Wort "`Atom"' hat hier seinen Ursprung, atomos bedeutet unteilbar. Dieses Modell wurde von Dalton (1800) weiter verfeinert, der die Atome nach ihrer Masse unterschied und feststellte, dass bei chemischen Reaktionen stets gleiche Teilchenanzahlen miteinander reagieren, sich dabei aber nur zu neuen Molekülen anordnen.
+
+Etwa hundert Jahre später wurde bekannt, dass Atome aus Teilchen mit unterschiedlicher Ladung bestehen. Dies führte zum Rosinenkuchenmodell (nach Thomson), bei dem die Elektronen sich in einer gleichmäßigen positiv geladenen Umgebung bewegen, und dem Rutherfordschen Atommodell, bei dem fast die gesamte Masse des Atoms im positiv geladenen Kern vereinigt ist, der von den Elektronen umkreist wird.
+
+Um Probleme mit dem Rutherfordschen Modell zu beheben (diskrete Spektrallinien, Energieverlust durch beschleunigte Ladung), führte Bohr in seinem Modell Postulate ein, die nur bestimmte Bahnen für die Elektronen erlauben und Energietransfer zwischen Atom und Umgebung nur durch Quantensprünge möglich ist. Mit diesem Modell lassen sich die Spektrallinien des Wasserstoffatoms vorhersagen.
+
+Durch die Quantenmechanik wird das Bohrsche Atommodell abgelöst, da es unbegründete Postulate und klassische Mechanik benötigt und mit der Heisenbergschen Unschärferelation in Konflikt steht. In der Quantenmechanik wird den Elektronen (wie allen anderen Mikroteilchen) eine Aufenthaltswahrscheinlichkeitsverteilung zugeschrieben, die je nach Quantenzahlen verschiedene Gestalten annimmt, sogenannte Orbitale.
+
+\subsection{Das Rutherfordsche Atommodell}
+Bei Experimenten mit Alphastrahlung (zweifach positiv geladene Heliumatome, $2n2p$), die Rutherfords Mitarbeiter Geiger und Marsden auf eine Goldfolie richteten, stellten sie fest, dass viele Teilchen durch die Folie hindurchgingen, einige aber auch abgelenkt oder sogar zurückgeworfen wurden. Dies führte zur Verwerfung des Rosinenkuchenmodells und zu der Annahme, dass Atome aus einem schweren, positiv geladenen Kern bestehen, an dem die Alphateilchen gestreut wurden. Aufgrund der geringen Ablenkwahrscheinlichekeit muss der Kern im Vergleich zum gesamten Atom verschwindend klein sein, aber praktisch die gesammte Masse in sich vereinen.
+
+Die Elektronen können außerhalb des Kernes nicht in Ruhe sein, da sie sonst sofort wegen des Coulombfeldes in den Kern stürzen würden. Als Lösung schlug Rutherford vor, dass die Elektronen den Kern umkreisen, so dass sich Coulomb- und Zentripetalkraft genau die Wage halten.
+
+Problematisch an dem Modell ist, dass die kreisenden Ladungen stetig Energie abstrahlen würden und schließlich in den Kern stürzen würden. Außerdem müsste so jedes Atom spektral kontinuierliche Strahlung aussenden können, was im Widerspruch zu den beobachteten diskreten Spektrallinien steht.
+
+\subsection{Bohrsches Atommodell}
+Bohr wendete Methoden der Quantentheorie zusammen mit klassischer Mechanik an, um die Probleme des Rutherfordschen Atommodells zu beheben. Wie Rutherford geht er von den Kern umkreisenden Elektronen aus, denen jedoch nur bestimmte Bahnen erlaubt sind. Dies wird in den zwei Bohrschen Postulaten ausgedrückt:
+\begin{enumerate}[noitemsep]
+  \item Elektronen können sich nur auf Bahnen befinden, auf denen ihr Drehimpuls ganzzahlige Vielfache von $\hbar = \frac{h}{2\pi}$ annimmt: $|\vec l| = mvr = n\hbar$. Die Einschränkung kann durch die deBroglie-Wellenlänge plausibel gemacht werden: die Wellenlänge des Elektrons muss dem Bahnradius entsprechen: $2\pi r = n\lambda$, mit $\lambda = \frac{h}{mv}$ ergibt sich die Gleichung.
+  \item Elektronen können Bahnen durch Quantensprünge wechseln, dabei findet Energietransfer gemäß $\Delta E = hf$ statt.
+\end{enumerate}
+
+Aus der Bedingung, dass die Elektronen durch die Coulombkraft des Kerns auf Kreisbahnen gehalten werden und der Quantisierung der Drehimpulse ergibt sich
+\begin{align*}
+  mvr = \frac{nh}{2\pi} \Rightarrow v = \frac{nh}{2\pi mr}\\
+  \frac{Ze^2}{4\pi\varepsilon_0 r^2} = \frac{mv^2}{r} = \frac{n^2h^2}{4\pi^2r^3}\\
+  \Rightarrow r = \frac{\varepsilon_0 n^2 h^2}{\pi Z e^2m}\\
+  \Rightarrow v = \frac{Ze^2}{2\varepsilon_0nh}
+\end{align*}
+
+Die kinetische Energie eines Elektrons ergibt sich ebenfalls aus dem Gleichgewicht der Coulomb- und Zentripetalkraft:
+\begin{align*}
+  \frac{Ze^2}{4\pi\varepsilon_0 r^2} = \frac{mv^2}{r} \stackrel{\cdot\frac{r}{2}}{\Rightarrow} = E_\text{kin} = \frac{Ze^2}{8\pi\varepsilon r}
+\end{align*}
+Die potentielle Energie ist
+\begin{equation*}
+  E_\text{pot} = \int_\infty^r \frac{Ze^2}{4\pi\varepsilon_0 r'^2} \text{d}r' = \frac{Ze^2}{4\pi\varepsilon_0} \int_\infty^r \frac{1}{r'^2} \text{d}r' = \frac{Ze^2}{4\pi\varepsilon_0} \left[ -\frac{1}{r'} \right]_\infty^r = -\frac{Ze^2}{4\pi\varepsilon_0 r} \stackrel{!}{=} -2 E_\text{kin}
+\end{equation*}
+
+Die Gesamtenergie eines Elektrons ist demnach $E = E_\text{kin} + E_\text{pot} = -E\text{kin} = -\frac{Ze^2}{8\pi\varepsilon_0 r}$, mit den oben berechneten erlaubten Radien also
+\begin{equation*}
+  E_\text{n} = -\frac{e^4m}{8\varepsilon_0^2h^2}\frac{Z^2}{n^2} = -13.6 \frac{Z^2}{n^2}\unit{eV},
+\end{equation*}
+woraus sich mit $\Delta E = hf$ die Spektrallinien des Wasserstoffs ($Z=1$) ergeben:
+\begin{equation*}
+  f = \frac{e^4m}{8\varepsilon_0h^3} Z^2 \left( \frac{1}{n^2} - \frac{1}{m^2} \right) =: R_\text{H} Z^2 \left( \frac{1}{n^2} - \frac{1}{m^2} \right)
+\end{equation*}
+
+Die Rydbergfrequenz $R_\text{H}$ ist eine zusammengesetzte Naturkonstante und beträgt $\unit[3.29\cdot 10^{15}]{Hz}$.
+
+Die gröbsten Unzulänglichkeiten des Bohrschen Atommodells sind:
+\begin{itemize}[noitemsep]
+  \item Die Postulate sind nicht begründbar.
+  \item Nur für Einelektronensysteme anwendbar.
+  \item Das Wasserstoffatom müsste eine Scheibe sein.
+  \item Widerspruch zur Unschärferelation.
+\end{itemize}
+
+\subsection{Quantenzahlen}
+Die Hauptquantenzahl entspricht dem Energieniveau $n$ im Bohrschen Atommodell.
+
+Die Nebenquantenzahl oder (Bahn)Drehimpulsquantenzahl $l$ legt mögliche Bahndrehimpulse bei gegebener Hauptquantenzahl fest. Es gilt $|\vec l| = \sqrt{l(l+1)}\hbar$, wobei $l \in [0, n)$. Anstelle von Zahlen werden für die Werte von $l$ auch Buchstaben verwendet: $s$, $p$, $d$, $f$ und alphabetisch weiter.
+
+Die magnetische Quantenzahl $m_l$ beschreibt die Orientierung des Drehimpulses $\vec l$ relativ zu einem externen Magnetfeld. Sie kann Werte zwischen $\pm l$ annehmen: $l_\text{z} = m_l\hbar$, $m_l \in [-l, l]$. Die $2l$-fache Entartung zeigt sich durch Aufspaltung von Spektrallinien durch ein Magnetfeld: Zeeman-Effekt.
+
+Die Spinquantenzahl $s = \frac{1}{2}$ beschreibt den Eigendrehimpuls eines Elektrons ("`Rotation um sich selbst"'), der bezüglich einer festen Achse nur die beiden Werte $s_\text{z} = m_s\hbar = \pm \frac{1}{2}\hbar$ annehmen kann. $m_s$ ist die Orientierungs- oder magnetische Spinquantenzahl. Die Unterscheidung von Atomen nach dem Elektronenspin erfolgte erstmals im Stern-Gerlach-Experiment.
+
+Das Pauli-Prinzip besagt, dass sich zwei Elektronen innerhalb eines Atoms in mindestens einer der vier Quantenzahlen $n$, $l$, $m_l$, $m_s$ unterscheiden müssen.
+
+
+\subsection{Wichtige Versuche der Atomphysik}
+\subsubsection{Franck-Hertz}
+Ein Beleg für diskrete Energieniveaus. In einer verdünnten Quecksilberatmosphäre werden Elektronen beschleunigt und durch ein Gegenfeld ihre Geschwindigkeit gemessen. Es ergibt sich eine charakteristische Strom-Beschleunigungsspannungskennlinie, die äquidistante Täler aufweist. Jedes Tal entspricht einer Anregung der Quecksilberatome durch einen inelastischen Stoß mit einem Elektron. Andere Anregungen der Elektronen finden nicht statt.
+
+\subsubsection{Stern-Gerlach}
+Beleg für die Existenz des Elektronenspins. Silberatome im Grundzustand ($n=1$, $l=0$, $m_l = 0$) werden in einem Magnetfeld in zwei unterschiedliche Richtungen abgelenkt (der Strahl teilt sich auf). Wegen $m_l = 0$ sollten die Atome eigentlich unbeeinflusst durch das Magnetfeld hindurchgehen, aufgrund des Elektronenspins haben sie aber dennoch einen der beiden möglichen magnetischen Spinmomente, was die Beeinflussung durch das Magnetfeld erklärt.
+
+
+\section{Kernphysik}
+
+\subsection{Stichworte}
+\begin{itemize}[noitemsep]
+  \item Atomkernaufbau (Kernmodelle)
+  \item Bindungsenergie (Bethe-Weizäcker)
+  \item Arten der radioaktiven Strahlung
+  \item Identifizierung/Messung radioaktiver Strahlung
+  \item Strahlungsgrößen
+  \item Zerfallsreihen
+  \item Kernspaltung, Kernfusion
+\end{itemize}
+
+\subsection{Atomkernaufbau}
+Der Atomkern ist aus Neutronen (keine Ladung, nur Masse) und Protonen (minimal leichter als Neutron, Ladung) aufgebaut. Die Massenzahl $A$ beschreibt die Gesamtzahl der Kernteilchen: die Summe aus Protonen $Z$ (Kernladungszahl) und Neutronen $N$: $A = Z+N$. Die Größe eines Kerns ist ungefähr proportional zur dritten Wurzen der Massenzahl, $R_\text{K} \approx r_0 \sqrt[3]{A}$, mit dem Durchmesser $r_0 \approx \unit[1.3 \cdot 10^{-15}]{m}$ des Wasserstoffatoms.
+
+Das chemische Verhalten von Atomen wird durch die Kernladungszahl $Z$ bestimmt. Kerne mit gleicher Kernladungszahl, aber unterschiedlichen Neutronenzahlen werden als Isotope ("`am gleichen Ort"' im Periodensystem) bezeichnet. Elemente mit ungrader Ordnungszahl können höchstens zwei stabile Isotope haben, Elemente mit gerader Ordnungszahl wesentlich mehr (Astonsche Isotopenregel).
+
+\subsection{Bindungsenergie, Stabilität}
+Die Masse eines Atomkerns ist stets geringer als die Masse seiner Nukleonen im ungebundenem Zustand. Die Differenz wird Massendefekt genannt: $B = Zm_\text{p} + Nm_\text{n} - m_\text{K}$. Diese fehlende Masse ist in der Bindungsenergie des Kerns aufgegangen gemäß $E = mc^2$, also $E_\text{B} = Bc^2$. Größenordnungsmäßig entspricht ein Massendefekt einer atomaren Masseneinheit einer Bindungsenergie von knapp $\unit[1]{GeV}$.
+
+Für die Stabilität eines Kerns hängt vor allem von der Bindungsenergie je Nukleon ab. Diese hat für sehr leichte und sehr schwere Kerne geringe Werte. Ein Maximum wird bei Ni-62 erreicht. Ausreißer bei leichten Kernen sind Kerne mit $Z = N$, es sind dies \ce{^4_2 He}, \ce{^8_4 Be}, \ce{^12_6 C} und \ce{^16_8 O}.
+
+Bei leichten stabilen Kernen ist das Verhältnis von Protonen zu Neutronen gleich; je schwerer die Kerne werden, desto größer wird der Neutronenüberschuss (um die elektrostatische Abstoßung durch Kernkräfte aufzuwiegen). Der schwerste stabile Kern ist \ce{^209_64 Bi} (hat aber Alphazerfall mit $t_{1/2} = \unit[2\cdot 10^{19}]{a}$), bei den schwersten Kernen ist die Neutronenzahl etwa 1.6mal so groß wie die Protonenzahl.
+
+\subsection{Starke Wechselwirkung}
+Da sich Protonen aufgrund ihrer gleichen Ladung abstoßen müssten, muss im Kern eine weitaus größere, anziehende Kraft vorhanden sein. Es ist dies die Kernkraft oder starke Wechselwirkung, die im Gegensatz zu elektrischer oder Gravitationskraft sehr begrenzte Reichweite ($\unit[10^{-15}]{m}$).
+
+\subsection{Tröpfchenmodell}
+Eine gute Beschreibung der Bindungsenergie von Atomkernen wird durch die Bethe-Weizsäcker-Formel gegeben:
+\begin{align*}
+  E_\text{B} &= E_\text{Vol} - E_\text{Oberfl} - E_\text{Coulomb} - E_\text{Symm} + E_\text{Paar} \\
+  E_\text{B} &= a_\text{V}A - a_\text{O}A^{\frac{2}{3}} - a_\text{C}Z(Z-1)A^{-\frac{1}{3}} - a_\text{S} \frac{(N-Z)^2}{4A} + a_\text{P} A^{-\frac{1}{2}}
+\end{align*}
+Die Faktoren $a_\alpha$ wurden empirisch ermittelt. Bis zu 30 Nukleonen ist die Formel nur näherungsweise korrekt, darüber beträgt die Abweichung von der Realität weniger als ein Prozent.
+
+Die Einzelnen Summanden entstehen wie folgt: Die Bindungsenergie wird hauptsächlich durch die Anzahl der Nukleonen durch die starke Wechselwirkung verursacht. Davon abgezogen werden die folgenden Terme: Die Nukleonen an der "`Kernoberfläche"' sind schwächer gebunden, da sie weniger Nachbarn haben. Da der Kernradius mit $\sqrt[3]{A}$ geht und die Oberfläche quadratisch mit dem Radius, ergibt sich $A^{\frac{2}{3}}$. Der Coulombterm beschreibt die Abstoßung eines Protons ($Z$) von allen anderen Protonen ($Z-1$). Das Coulommpotential geht mit $1/R$, daher $A^{-\frac{1}{3}}$. Der Symmetrieanteil ist quantenmechanisch begründet und sorgt für ein Gleichgewicht zwischen $N$ und $Z$. Der Paarungsterm schließlich beschreibt die beobachteten Unterschiede der Bindungsenergie von stark gebundenen gg-Kernen ($a_\text{P}$ positiv) und schwach gebundenen uu-Kernen ($a_\text{P}$ negativ) und dem Rest ($a_\text{P}=0$).
+
+\subsection{Radioaktivität}
+Instabile Kerne senden spontan und nicht beeinflussbar radioaktive Strahlung aus. Dabei handelt es sich um $\alpha$-, $\beta$- und $\gamma$-Strahlung, die aus Heliumkernen \ce{{2p} {2n}}, Elektronen oder elektromagnetischer Strahlung besteht. Alphastrahlung entsteht, wenn sich im Kern ein $\alpha$-Teilchen ausbildet, das aufgrund quantenmechanischer Effekte (Tunneln) den Potentialtopf der starken Wechselwirkung überwinden kann und dann von der Coulombkraft weiter von dem Kern abgestoßen wird.
+
+Kerne, die abseits der Stabilitätslinie liegen, können sich ihr durch Betazerfall nähern. Bei Neutronenüberschuss wird ein Neutron in ein Proton umgewandelt, dabei entsteht ein Elektron und ein Elektron-Antineutrino ($\beta^{-}$-Strahlung). Bei Protonenüberschuss entstehen aus einem Proton ein Neutron, ein Positron und ein Elektron-Neutrino ($\beta^{+}$-Strahlung). Die Neutrinos sind zur Erklärung der kontinuierlich verteilten Energie der Betastrahlung notwendig. Sie haben keine Ladung und keine oder nur sehr geringe Masse. Bei natürlichen Isotopen tritt nur $\beta^{-}$-Strahlung auf.
+
+Gammastrahlung ist hochenergetische elektromagnetische Strahlung, die von Kernen ausgesendet wird, die sich nach einem $\alpha$- oder $\beta$-Zerfall in einem angeregten Zustand befinden. Die Gammaspektrallinien sind sehr scharf und lassen eine Identifikation des Strahlers zu (Gammaspektroskopie).
+
+Der radioaktive Zerfall erfolgt statistisch, die momentane Änderungsrate hängt nur von der Art des zerfallenden Materials und der Anzahl der vorhandenen Kerne ab:
+\begin{equation*}
+  \dot N = -\lambda N \Rightarrow N = N_0 e^{-\lambda t}
+\end{equation*}
+Eine gebräuchliche Größe ist die Halbwertszeit, die sich aus der Zerfallskonstante $\lambda$ zu $T_{1/2} = \frac{\ln 2}{\lambda}$ ergibt. Die möglichen Werte der Halbwertszeit liegen zwischen $\unit[10^{-10}]{s}$ und $\unit[10^{16}]{a}$. Die Aktivität eines Präparates gibt die Anzahl der Zerfälle pro Sekunde an. Für die Aktivität gilt $A(t) = N_0 \cdot \lambda \cdot e^{-\lambda t}$.
+
+\subsection{Untersuchung/Messung der Strahlung}
+Die ursprüngliche Benennung der Strahlung erfolgte nach ihrer Durchdringungsfähigkeit. Für $\alpha$-Strahlung beträgt sie nur weniger Zentimeter in Luft, sie wird durch ein Blatt Papier oder die äußersten Hautschichten vollständig absorbiert. $\beta$-Strahlung wird durch wenige Millimeter Aluminium, Plexiglas oder Blei absorbiert, in Luft beträgt die Reichweite je nach Energie bis zu einige Meter. Gammastrahlung schließlich lässt sich nur exponentiell abschwächen (die Halbwertsdicke von Blei beträgt je nach Energie gut $\unit[10]{mm}$).
+
+Eine weitere Unterscheidungsmöglichkeit ergibt sich durch die Unterschiede, die sich durch die Ladung und das Ladungs-Masseverhältnis in magnetischen und elektrischen Feldern zeigen.
+
+Um Strahlung zu messen, macht man sich ihre ionisierende Wirkung zunutze. Dies kann einerseits in Geiger-Müller-Röhren passieren, in denen ein Ionisierungsereignis durch eine hohe elektrische Spannung zu einer Gasentladung führt, die registriert wird. Durch geeignete Maßnahmen muss die Entladung schnell unterbunden werden (Löschgas, Unterbrechung der Spannung). Eine andere Möglichkeit ist eine Ionisationskammer, in der nur die durch Ionisation entstehenden Ladungen "`abgesaugt"' werden, so dass ein Zusammenhang zwischen Ionisierungsleistung und abgesaugter Ladung besteht. Für Langzeitbeobachtung (medizinisches oder nukleartechnisches Personal) eignen sich Filmdosimeter, bei denen ein lichtdicht verpackter fotografischer Film durch radioaktive Strahlung geschwärzt wird.
+
+Quantitativ können die Ionendosis
+\begin{equation*}
+  J = \frac{\text{d}Q}{\text{d}m},
+\end{equation*}
+also durch die Strahlung pro Masse getrennte Ladung oder die Energiedosis
+\begin{equation*}
+  D = \frac{\text{d}E}{\text{d}m},
+\end{equation*}
+die durch die Strahlung pro Masse zugeführte Energie in der Einheit $\unit{\frac{J}{kg}} = \unit{Gy}$ angegeben werden. Aufgrund der unterschiedlichen Schädlichkeit der verschiedenen Strahlungsarten für den Menschen (ein einzelnes Alphateilchen gibt seine Energie auf einem sehr kurzen Weg ab, wenn dabei ein Zellkern getroffen wird, ist eine gravierende Zerstörung der DNA wahrscheinlich), wird die Energiedosis mit einem Qualitätsfaktor $Q$ gewichtet, um die Äquivalentdosis $H = QD$ zu erhalten. $Q=1$ für $\beta$- und $\gamma$-Strahlung, $Q=10$ für $\alpha$-Strahlung. Zur Unterscheidung der sonst gleichen Einheiten von $D$ und $H$ wird für letztere die Einheit $\unit{Sv}$ verwendet.
+
+\subsection{Kernspaltung und -fusion}
+Da die Bindungsenergie (und damit der Massendefekt) für Kerne mittleren Gewichts ein maximum Besitzt, lassen sich durch spaltung von schweren Kernen oder die Fusion von leichten Kernen neue Kerne mit größerem Massendefekt als die/der Ausgangkern(e) erzeugen. Die fehlende Masse wird gemäß $E=mc^2$ in Energie umgesetzt und erklärt die hohe Energiedichte von Kernbrennstoffen. Bei der Spaltung eines Uranatoms werden etwa $\unit[200]{MeV}$ frei, aus $\unit[1]{kg}$ Uran kan so viel Energie gewonnen werden wie aus der Verbrennung von $\unit[2500]{t}$ Steinkohle.
+
+Zur Kernfusion müssen leichte Kerne entgegen der elektrischen Abstoßungskräfte nahe genug aneinander gebracht werden, was durch hohe Temperaturen (beispielsweise im Inneren der Sonne) erreicht wird. Dort fusionieren zunächst zwei \ce{^1_1H} Wasserstoffkerne zu einem \ce{^2_1H} Deuteriumkern, der dann mit einem weiteren Proton zu einem \ce{^3_2He} Kern fusioniert. Zwei dieser Kerne fusionieren schließlich zu \ce{^4_2He}. 
+
+
+\end{document}
