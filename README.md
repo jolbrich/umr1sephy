@@ -4,7 +4,11 @@ Aufsatzstichpunkte zusammengestellt von unbekanntem Autor aus Altklausuren(?) vo
 
 Mit gesundem Menschenverstand zu verwenden.
 
+**Download der Dateien: oben in der Liste anklicken und dann oben rechts über dem angezeigten Dokument "Raw" anklicken und speichern.**
+
 ## Aufgaben/Aufsätze vergangener Durchgänge
+
+Die Aufgaben sind unterschiedlich gewichtet, es "sollen fünf" bearbeitet werden, bei den Aufsätzen "müssen zwei" bearbeitet werden; Stichpunkte sind dabei gegeben.
 
 ### Frühjahr 2015
 * Wärmekapazität Alublock
